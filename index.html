@@ -315,16 +315,19 @@
         }
         
         .system-diagram {
-            max-width: 900px;
+            max-width: 100%;
             margin: 0 auto;
             background: url('https://unsplash.com/fr/photos/ecran-de-surveillance-active-qwtCeJ5cLYs') no-repeat center center/cover;
-            height: 500px;
+            min-height: 500px;
+            height:auto;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            box-sizing: border-box;
         }
         
         .system-diagram::before {
@@ -336,6 +339,7 @@
             bottom: 0;
             background: rgba(0, 87, 146, 0.8);
             border-radius: 8px;
+            z-index: 0;
         }
         
         .diagram-content {
@@ -733,8 +737,8 @@
             });
         });
         
-        // Simple animation for stats counting
-        const statItems = document.querySelectorAll('.stat-item h3');
+        // Fixed statistics animation with units preserved
+        const statValues = document.querySelectorAll('.stat-value');
         const observerOptions = {
             threshold: 0.5
         };
@@ -742,26 +746,29 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const stat = entry.target;
-                    const targetValue = parseInt(stat.textContent);
+                    const statValue = entry.target;
+                    const targetValue = parseFloat(statValue.dataset.target);
+                    const isDecimal = targetValue % 1 !== 0;
                     let currentValue = 0;
                     
+                    const increment = targetValue / 50;
+                    
                     const interval = setInterval(() => {
-                        currentValue += Math.ceil(targetValue / 50);
+                        currentValue += increment;
                         if (currentValue >= targetValue) {
-                            stat.textContent = targetValue.toLocaleString() + (stat.textContent.includes('B') ? 'B' : stat.textContent.includes('M') ? 'M' : '');
+                            statValue.textContent = isDecimal ? targetValue.toFixed(1) : targetValue;
                             clearInterval(interval);
                         } else {
-                            stat.textContent = currentValue.toLocaleString();
+                            statValue.textContent = isDecimal ? currentValue.toFixed(1) : Math.round(currentValue);
                         }
                     }, 30);
                     
-                    observer.unobserve(stat);
+                    observer.unobserve(statValue);
                 }
             });
         }, observerOptions);
         
-        statItems.forEach(stat => {
+        statValues.forEach(stat => {
             observer.observe(stat);
         });
     </script>
