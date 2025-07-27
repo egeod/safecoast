@@ -249,11 +249,19 @@
             color: var(--primary);
             margin-bottom: 10px;
             white-space: normal;
+            display: flex;
+            justify-content: justify;
+            align-items: center;
         }
-        .prefix, .suffix {
-            font-weight: normal;
-            font-size: 1.6rem;
-            margin: 0 2px;
+        
+        .stat-value {
+            display: inline-block;
+            min-width: 60px;
+        }
+        
+        .stat-unit {
+            margin-left: 4px;
+            font-size: 1.5rem;
         }
         
         /* Solution Section */
@@ -293,6 +301,7 @@
         
         .card-content {
             padding: 30px;
+            justify-content: justify;
         }
         
         .card-content h3 {
@@ -333,9 +342,13 @@
             position: relative;
             z-index: 2;
             color: white;
-            text-align: center;
+            text-align: justify;
             padding: 30px;
             max-width: 600px;
+        }
+
+        .diagram-text p {
+            margin-bottom: 1.2em;
         }
         
         .diagram-content h3 {
@@ -686,8 +699,8 @@
                     <h3>Contact Us</h3>
                     <ul class="footer-links">
                         <li><i class="fas fa-map-marker-alt"></i> EGEOD, Toulouse, France</li>
-                        <li><i class="fas fa-phone"></i> 0033 207 58 01 11 83</li>
-                        <li><i class="fas fa-envelope"></i>egeodegeod@gmail.fr</li>
+                        <li><i class="fas fa-phone"></i> +33 07 58 01 11 83</li>
+                        <li><i class="fas fa-envelope"></i> egeodegeod@gmail.com</li>
                     </ul>
                 </div>
                 
