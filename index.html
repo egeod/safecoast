@@ -352,7 +352,20 @@
         }
 
         .diagram-text p {
-            margin-bottom: 1.2em;
+            position: relative;
+            margin-bottom: 1.5em;
+            padding-left: 30px; 
+            line-height: 1.5;
+        }
+
+        .diagram-text p::before {
+            content: "✔️"; 
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #00ff00; 
+            font-size: 1.2rem;
+            line-height: 1.5;
         }
         
         .diagram-content h3 {
